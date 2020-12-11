@@ -13,7 +13,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 /**
  * 接受互联网消息处理
  * 
- * @author Administrator
+ * @author huangzf
  *
  */
 public class IntenetDataHandler extends SimpleChannelInboundHandler<ByteBuf> {
