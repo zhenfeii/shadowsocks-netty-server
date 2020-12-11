@@ -43,14 +43,14 @@ public class IntenetDataHandler extends SimpleChannelInboundHandler<ByteBuf> {
 		} catch (Exception e) {
 			ctx.close();
 			channelClose();
-			logger.error("read intenet message error", e);
+			logger.error("read internet message error", e);
 		}
 	}
 
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 		ctx.close();
-		logger.info("IntenetDataHandler channelInactive close");
+		logger.info("InternetDataHandler channelInactive close");
 		channelClose();
 	}
 
@@ -58,7 +58,7 @@ public class IntenetDataHandler extends SimpleChannelInboundHandler<ByteBuf> {
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
 		ctx.close();
 		channelClose();
-		logger.error("IntenetDataHandler error", cause);
+		logger.error("InternetDataHandler error", cause);
 	}
 
 	private void channelClose() {
