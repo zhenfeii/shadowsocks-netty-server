@@ -48,8 +48,7 @@ public class ClientProxyHandler extends ChannelInboundHandlerAdapter {
 	 * 
 	 * @param host
 	 * @param port
-	 * @param clientProxyChannel
-	 *            和代理服务器建立的连接
+	 * @param clientProxyChannel 和代理服务器建立的连接
 	 * @param _crypt
 	 */
 	private void init(final String host, final int port, final ICrypt _crypt) {
