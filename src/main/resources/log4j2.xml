@@ -27,8 +27,10 @@
 			<AppenderRef ref="asynLogger" />
 			<AppenderRef ref="Console" />
 		</AsyncLogger>
-		<AsyncRoot level="info" includeLocation="true">
+		<AsyncLogger level="debug" includeLocation="true">
 			<AppenderRef ref="asynLogger" />
+		</AsyncLogger>
+		<AsyncRoot level="info" includeLocation="true">
 			<AppenderRef ref="Console" />
 		</AsyncRoot>
 	</loggers>
