@@ -48,7 +48,6 @@ public class ClientProxyHandler extends ChannelInboundHandlerAdapter {
 	 * 
 	 * @param host
 	 * @param port
-	 * @param clientProxyChannel 和代理服务器建立的连接
 	 * @param _crypt
 	 */
 	private void init(final String host, final int port, final ICrypt _crypt) {
@@ -94,6 +93,14 @@ public class ClientProxyHandler extends ChannelInboundHandlerAdapter {
 		byte[] decrypt = CryptUtil.decrypt(_crypt, msg);
 		if (remoteChannel.get() != null) {
 			remoteChannel.get().writeAndFlush(Unpooled.wrappedBuffer(decrypt));
+			//参考https://blog.csdn.net/againI/article/details/109311226
+			//ByteBuf is a reference-counted object which has to be released explicitly via the release() method.
+			//解决 io.netty.util.internal.OutOfDirectMemoryError
+			try {
+				buff.release();
+			}catch (Exception e){
+				logger.error("release error: ",e);
+			}
 		} else {
 			clientCache.writeBytes(decrypt);
 		}
@@ -115,13 +122,17 @@ public class ClientProxyHandler extends ChannelInboundHandlerAdapter {
 
 	private void channelClose() {
 		try {
-			if (remoteChannel.get() != null) {
+			if (remoteChannel != null && remoteChannel.get() != null) {
 				remoteChannel.get().close();
 				remoteChannel = null;
 			}
-			clientProxyChannel.close();
-			clientCache.clear();
-			clientCache = null;
+			if(clientProxyChannel != null){
+				clientProxyChannel.close();
+			}
+			if(clientCache != null){
+				clientCache.clear();
+				clientCache = null;
+			}
 		} catch (Exception e) {
 			logger.error("close channel error", e);
 		}
