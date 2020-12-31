@@ -18,3 +18,8 @@ Netty堆外内存泄露排查盛宴
 https://tech.meituan.com/2018/10/18/netty-direct-memory-screening.html
 
 
+--有空参照这篇文章再看看
+Netty堆外内存泄漏排查，这一篇全讲清楚了
+https://juejin.cn/post/6844904036672471048
+
+
